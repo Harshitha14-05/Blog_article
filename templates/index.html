@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <!-- ✅ Add "Create Post" Button -->
+    <div class="flex justify-end mb-4">
+        <a href="{{ url_for('create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+            ➕ New Post
+        </a>
+    </div>
+
+    {% for post in posts %}
+    <div class="bg-card p-6 rounded-xl mb-6 shadow">
+        <h2 class="text-2xl font-semibold mb-2">
+            <a href="{{ url_for('post', post_id=post[0]) }}" class="hover:underline">{{ post[1] }}</a>
+        </h2>
+
+        {% if post[3] %}
+        <img src="{{ post[3] }}" alt="Post image" class="w-full rounded-lg mb-4">
+        {% endif %}
+
+        <p class="text-subtext mb-2">{{ post[2][:200] }}...</p>
+    </div>
+    {% endfor %}
+{% endblock %}

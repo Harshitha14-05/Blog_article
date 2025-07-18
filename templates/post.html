@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ post[1] }}{% endblock %}
+
+{% block content %}
+<div class="bg-card p-6 rounded-xl shadow">
+    <!-- Post Title -->
+    <h2 class="text-3xl font-bold mb-4">{{ post[1] }}</h2>
+
+    <!-- Optional Image -->
+    {% if post[3] %}
+    <img src="{{ post[3] }}" class="w-full rounded-lg mb-6" alt="Post Image">
+    {% endif %}
+
+    <!-- Post Content -->
+    <p class="text-text leading-relaxed">{{ post[2] }}</p>
+
+    <!-- Post Actions -->
+    <div class="mt-6 flex justify-between items-center">
+        <!-- Back Link -->
+        <a href="{{ url_for('index') }}" class="text-blue-400 hover:underline">← Back to Home</a>
+
+        <!-- Delete Button -->
+        <form action="{{ url_for('delete', post_id=post[0]) }}" method="POST"
+              onsubmit="return confirm('Are you sure you want to delete this post?');">
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+                🗑️ Delete Post
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
